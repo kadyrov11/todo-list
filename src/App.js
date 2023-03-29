@@ -69,14 +69,12 @@ function App() {
     setTodoId(id)
     setIsEdit(true)
     toggleModal()
-  } 
-
-  
+  }   
 
   return (
     <div className="mainContent">
       <div>
-        <Input onChange={(e) => setFilter(e.target.value)} placeholder="Search" />
+        <Input type="search" onChange={(e) => setFilter(e.target.value)} placeholder="Search" />
         <AddBtn onClick={() => toggleModal()} />
         { isOpen && 
           <Modal toggleModal={toggleModal}>

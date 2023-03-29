@@ -2,9 +2,9 @@ import React from 'react'
 
 import styles from './Input.module.css';
 
-function Input({onChange, ...props }) {
+function Input({onChange, type="text", ...props }) {
   return (
-    <input type='text' onChange={onChange} className={styles.input} {...props} />
+    <input type={type} onChange={onChange} className={styles.input} {...props} />
   )
 }
 
