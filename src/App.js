@@ -35,11 +35,15 @@ function App() {
 
   const toggleModal = () => {
     setIsOpen(prev => !prev)
-    isOpen && setIsEdit(false)
+    if(isOpen){
+      setNewTodo('')
+      setIsEdit(false)
+    }
+    
   }; 
 
   const toggleChecked = (id) => {
-    setTodos(todos.map(todo => todo.id === id ? {...todo, checked: !todo.checked} : todo))
+    setTodos(todos.map(todo => todo.id === id ? {...todo, completed: !todo.completed} : todo))
   } 
   const addTodo = (text) => {
     const todo = {
@@ -60,7 +64,8 @@ function App() {
     toggleModal()
   }
 
-  const handleEdit = (id) => {
+  const handleEdit = (id, text) => {
+    setNewTodo(text)
     setTodoId(id)
     setIsEdit(true)
     toggleModal()
@@ -75,7 +80,7 @@ function App() {
         <AddBtn onClick={() => toggleModal()} />
         { isOpen && 
           <Modal toggleModal={toggleModal}>
-            <Input onChange={(e) => setNewTodo(e.target.value)} placeholder={isEdit ? 'Edit' : 'Add new todo'} />
+            <Input value={newTodo} onChange={(e) => setNewTodo(e.target.value)} placeholder={isEdit ? 'Edit' : 'Add new todo'} />
             {isEdit ? <Button text='Edit' color="orange" onClick={() => editTodo()} /> : <AddBtn onClick={() => addTodo(newTodo)} /> } 
           </Modal> 
         }

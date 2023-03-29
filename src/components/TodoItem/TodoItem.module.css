@@ -12,9 +12,9 @@
 }
 
 .text{
-    width: 100px;
+    width: 150px;
 }
 
-.checked{
+.completed{
     text-decoration: line-through;
 }
