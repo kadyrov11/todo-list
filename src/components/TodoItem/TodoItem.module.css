@@ -14,3 +14,7 @@
 .text{
     width: 100px;
 }
+
+.checked{
+    text-decoration: line-through;
+}

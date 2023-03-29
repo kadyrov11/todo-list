@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {v4} from 'uuid';
 
 import AddBtn from "./components/AddBtn";
@@ -15,25 +15,17 @@ function App() {
   const [newTodo, setNewTodo] = useState('')
   const [isEdit, setIsEdit] = useState(false)
   const [todoId, setTodoId] = useState(null)
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      text: "run",
-      checked: true
-    },{
-      id: 2,
-      text: "drink water",
-      checked: true
-    },{
-      id: 3,
-      text: "rest",
-      checked: false
-    }, {
-      id: 4,
-      text: "exercise",
-      checked: false
-    }
-  ]);
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("todos"));
+    data && setTodos(data);
+  }, [])
+  
+  useEffect(() => {
+    todos.length && localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos])
+
 
   const filterTodos = (arr, filter) => {
     return arr.filter(todo => todo.text.includes(filter))
